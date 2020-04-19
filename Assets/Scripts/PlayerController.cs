@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float Speed;
     public float JumpVelocity;
+    public float LungeVelocity;
     public float FallMultiplier;
     public float LowGravFactor;
 
@@ -65,13 +66,19 @@ public class PlayerController : MonoBehaviour
         {
             sr.flipX = true;
         }
-        else
+        else if(horizontalVelocity < 0)
         {
             sr.flipX = false;
         }
 
         rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
         
+        if(Input.GetButtonDown("Lunge"))
+        {
+            anim.SetTrigger("Lunge");
+            float lunge = LungeVelocity * (sr.flipX ? -1 : 1);
+            rb.velocity += new Vector2(lunge, lunge * 0.1f);
+        }
 
         
     }
