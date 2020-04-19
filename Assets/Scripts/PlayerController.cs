@@ -15,10 +15,14 @@ public class PlayerController : MonoBehaviour
     private bool canJump;
 
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
+    private Animator anim;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -34,8 +38,12 @@ public class PlayerController : MonoBehaviour
         {
             canJump = false;
         }
+        else
+        {
+            canJump = true;
+        }
 
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && canJump)
         {
             rb.velocity = Vector2.up * JumpVelocity;
             canJump = false;
@@ -50,7 +58,20 @@ public class PlayerController : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (LowGravFactor - 1) * Time.deltaTime;
         }
 
-        rb.velocity = new Vector2(0, 0);
+        float horizontalVelocity = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
+        anim.SetFloat("Speed", Mathf.Abs(horizontalVelocity));
+
+        if(horizontalVelocity > 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
+
+        rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
+        
 
         
     }
