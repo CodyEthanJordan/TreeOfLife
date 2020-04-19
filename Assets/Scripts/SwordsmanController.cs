@@ -45,7 +45,8 @@ namespace Assets.Scripts
 
         public void Jump()
         {
-            if(!canJump)
+            Debug.Log(canJump);
+            if(!canJump || Dead)
             {
                 return;
             }
@@ -54,9 +55,32 @@ namespace Assets.Scripts
             canJump = false;
         }
 
+        public void Move(float dir)
+        {
+            if(Dead)
+            {
+                return;
+            }
+            float horizontalVelocity = dir * Speed * Time.deltaTime;
+            anim.SetFloat("Speed", Mathf.Abs(horizontalVelocity));
+            rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
+        }
+
+        public void Lunge(bool right)
+        {
+            if(lungeTimer < LungeCooldown || Dead)
+            {
+                return; //can't do that yet
+            }
+
+            anim.SetTrigger("Lunge");
+            dashDirection = right ? 1 : -1;
+            dashTimer = 0;
+            lungeTimer = 0;
+        }
+
         private void Update()
         {
-            Debug.Log("yo");
             //check for jump
             var collider = Physics2D.OverlapCircle(groundCheck.position, 0.12f);
             if (collider is null)
@@ -67,6 +91,41 @@ namespace Assets.Scripts
             {
                 canJump = true;
             }
+
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.deltaTime;
+            }
+            else if (rb.velocity.y > 0) //TODO: jump input?
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (LowGravFactor - 1) * Time.deltaTime;
+            }
+
+            if (rb.velocity.x > 0.01)
+            {
+                sr.flipX = true;
+            }
+            else if (rb.velocity.x < -0.01)
+            {
+                sr.flipX = false;
+            }
+
+            lungeTimer += Time.deltaTime;
+            dashTimer += Time.deltaTime;
+            if (dashDirection != 0)
+            {
+                if (dashTimer >= DashTime)
+                {
+                    dashDirection = 0;
+                }
+                else
+                {
+                    Debug.Log("yo");
+                    rb.velocity += new Vector2(DashSpeed * dashDirection, 0);
+                }
+            }
+                    Debug.Log(rb.velocity);
+
         }
     }
 }
