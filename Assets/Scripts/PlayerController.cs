@@ -38,6 +38,11 @@ namespace Assets.Scripts
 
         }
 
+        public void Die()
+        {
+            anim.SetTrigger("Die");
+        }
+
         void Update()
         {
             //check for jump
@@ -85,6 +90,11 @@ namespace Assets.Scripts
                 anim.SetTrigger("Lunge");
                 dashDirection = sr.flipX ? 1 : -1;
                 dashTimer = 0;
+            }
+
+            if(Input.GetKeyDown(KeyCode.K))
+            {
+                Die();
             }
 
             dashTimer += Time.deltaTime;

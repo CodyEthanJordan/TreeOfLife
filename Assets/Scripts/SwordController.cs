@@ -9,9 +9,13 @@ namespace Assets.Scripts
 {
     public class SwordController : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             Debug.Log(other);
+            if(other.CompareTag("Enemy"))
+            {
+
+            }
         }
     }
 }

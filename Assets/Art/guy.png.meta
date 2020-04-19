@@ -29,6 +29,27 @@ TextureImporter:
   - first:
       213: -3731534713186674114
     second: guy_5
+  - first:
+      213: -8617342438237263814
+    second: guy_3
+  - first:
+      213: 6508899539937633645
+    second: guy_4
+  - first:
+      213: 7508928558316066706
+    second: guy_5
+  - first:
+      213: -7956894764785292722
+    second: guy_6
+  - first:
+      213: -3728694128208711153
+    second: guy_7
+  - first:
+      213: 3597905369174760592
+    second: guy_8
+  - first:
+      213: 6489609720678004854
+    second: guy_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -134,7 +155,7 @@ TextureImporter:
         width: 75
         height: 48
       alignment: 9
-      pivot: {x: 0.7526202, y: 0.55871856}
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +176,7 @@ TextureImporter:
         width: 75
         height: 48
       alignment: 9
-      pivot: {x: 0.73174256, y: 0.54567}
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,7 +197,7 @@ TextureImporter:
         width: 75
         height: 48
       alignment: 9
-      pivot: {x: 0.73174256, y: 0.52283496}
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,14 +218,14 @@ TextureImporter:
         width: 75
         height: 48
       alignment: 9
-      pivot: {x: 0.75679564, y: 0.5521943}
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef979f7ca64d66e40800000000000000
-      internalID: 5649436337669503486
+      spriteID: a3828f485bc096880800000000000000
+      internalID: -8617342438237263814
       vertices: []
       indices: 
       edges: []
@@ -218,14 +239,14 @@ TextureImporter:
         width: 75
         height: 48
       alignment: 9
-      pivot: {x: 0.70251346, y: 0.5163107}
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dd7589d9b3203bf0800000000000000
-      internalID: -346737890182201901
+      spriteID: d65afac55a1445a50800000000000000
+      internalID: 6508899539937633645
       vertices: []
       indices: 
       edges: []
@@ -239,14 +260,98 @@ TextureImporter:
         width: 75
         height: 48
       alignment: 9
-      pivot: {x: 0.61482745, y: 0.4934757}
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3a1879e2fce63cc0800000000000000
-      internalID: -3731534713186674114
+      spriteID: 29717326db2153860800000000000000
+      internalID: 7508928558316066706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy_6
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 75
+        height: 48
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4aaecd6e5e639190800000000000000
+      internalID: -7956894764785292722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy_7
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 0
+        width: 75
+        height: 48
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f02f8042274014cc0800000000000000
+      internalID: -3728694128208711153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy_8
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 75
+        height: 48
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09cd129eed35ee130800000000000000
+      internalID: 3597905369174760592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy_9
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 0
+        width: 75
+        height: 48
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6783fe358a9bf0a50800000000000000
+      internalID: 6489609720678004854
       vertices: []
       indices: 
       edges: []
