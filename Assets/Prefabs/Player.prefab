@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3996525529760036405}
   m_Layer: 0
   m_Name: ParryBox
-  m_TagString: Untagged
+  m_TagString: Parrybox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5022,7 +5022,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.9
   m_AngularDrag: 0.05
   m_GravityScale: 3
   m_Material: {fileID: 0}
@@ -5072,7 +5072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2000
-  JumpVelocity: 15
+  JumpVelocity: 18
   LungeCooldown: 0.5
   FallMultiplier: 2.5
   LowGravFactor: 2
@@ -5093,7 +5093,7 @@ GameObject:
   - component: {fileID: 7804125925613757265}
   m_Layer: 8
   m_Name: Hurtbox
-  m_TagString: Untagged
+  m_TagString: Hurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5150,3 +5150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d40cd697201a642916671e064423b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParryRecoil: 20
+  FlaccidFrames: 0.3
+  weilder: {fileID: 7804125925300984097}

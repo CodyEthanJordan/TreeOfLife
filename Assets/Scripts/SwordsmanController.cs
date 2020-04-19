@@ -29,18 +29,24 @@ namespace Assets.Scripts
         protected Rigidbody2D rb;
         protected SpriteRenderer sr;
         protected Animator anim;
+        protected Collider2D col;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             sr = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
+            col = GetComponent<Collider2D>();
         }
 
         public void Die()
         {
+            Debug.Log("Dead");
             anim.SetTrigger("Die");
             Dead = true;
+            col.enabled = false;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+
         }
 
         public void Jump()
@@ -65,6 +71,20 @@ namespace Assets.Scripts
             anim.SetFloat("Speed", Mathf.Abs(horizontalVelocity));
             Vector2 force = new Vector2(horizontalVelocity, 0);
             rb.AddForce(force, ForceMode2D.Force);
+
+            if (rb.velocity.x > 0.01)
+            {
+                //sr.flipX = true;
+                var ls = this.transform.localScale;
+                this.transform.localScale = new Vector3(Mathf.Abs(ls.x), ls.y, ls.z);
+            }
+            else if (rb.velocity.x < -0.01)
+            {
+                //sr.flipX = false;
+                var ls = this.transform.localScale;
+                this.transform.localScale = new Vector3(-Mathf.Abs(ls.x), ls.y, ls.z);
+            }
+
         }
 
         public void Lunge(bool right)
@@ -108,15 +128,7 @@ namespace Assets.Scripts
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (LowGravFactor - 1) * Time.deltaTime;
             }
 
-            if (rb.velocity.x > 0.01)
-            {
-                sr.flipX = true;
-            }
-            else if (rb.velocity.x < -0.01)
-            {
-                sr.flipX = false;
-            }
-
+           
             lungeTimer += Time.deltaTime;
             dashTimer += Time.deltaTime;
             if (dashDirection != 0)
@@ -130,8 +142,6 @@ namespace Assets.Scripts
                     //rb.velocity += new Vector2(DashSpeed * dashDirection, DashSpeed * dashDirection);
                 }
             }
-                    Debug.Log(rb.velocity);
-
         }
     }
 }
