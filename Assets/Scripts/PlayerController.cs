@@ -2,84 +2,105 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Assets.Scripts
 {
-    public float Speed;
-    public float JumpVelocity;
-    public float LungeVelocity;
-    public float FallMultiplier;
-    public float LowGravFactor;
-
-    [SerializeField]
-    private Transform groundCheck;
-
-    private bool canJump;
-
-    private Rigidbody2D rb;
-    private SpriteRenderer sr;
-    private Animator anim;
-
-    void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-    }
+        public float Speed;
+        public float JumpVelocity;
+        public float LungeVelocity;
+        public float FallMultiplier;
+        public float LowGravFactor;
+        public float DashSpeed;
+        public float DashTime;
 
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        //check for jump
-        var collider = Physics2D.OverlapCircle(groundCheck.position, 0.12f);
-        if(collider is null)
-        {
-            canJump = false;
-        }
-        else
-        {
-            canJump = true;
-        }
+        [SerializeField]
+        private Transform groundCheck;
 
-        if(Input.GetButtonDown("Jump") && canJump)
+        private bool canJump;
+        private int dashDirection = 0;
+        private float dashTimer = 10000;
+
+        private Rigidbody2D rb;
+        private SpriteRenderer sr;
+        private Animator anim;
+
+        void Awake()
         {
-            rb.velocity = Vector2.up * JumpVelocity;
-            canJump = false;
+            rb = GetComponent<Rigidbody2D>();
+            sr = GetComponent<SpriteRenderer>();
+            anim = GetComponent<Animator>();
         }
 
-        if (rb.velocity.y < 0)
+        void Start()
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (LowGravFactor - 1) * Time.deltaTime;
+
         }
 
-        float horizontalVelocity = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
-        anim.SetFloat("Speed", Mathf.Abs(horizontalVelocity));
-
-        if(horizontalVelocity > 0)
+        void Update()
         {
-            sr.flipX = true;
-        }
-        else if(horizontalVelocity < 0)
-        {
-            sr.flipX = false;
-        }
+            //check for jump
+            var collider = Physics2D.OverlapCircle(groundCheck.position, 0.12f);
+            if (collider is null)
+            {
+                canJump = false;
+            }
+            else
+            {
+                canJump = true;
+            }
 
-        rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
-        
-        if(Input.GetButtonDown("Lunge"))
-        {
-            anim.SetTrigger("Lunge");
-            float lunge = LungeVelocity * (sr.flipX ? -1 : 1);
-            rb.velocity += new Vector2(lunge, lunge * 0.1f);
-        }
+            if (Input.GetButtonDown("Jump") && canJump)
+            {
+                rb.velocity = Vector2.up * JumpVelocity;
+                canJump = false;
+            }
 
-        
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.deltaTime;
+            }
+            else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (LowGravFactor - 1) * Time.deltaTime;
+            }
+
+            float horizontalVelocity = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
+            anim.SetFloat("Speed", Mathf.Abs(horizontalVelocity));
+
+            if (horizontalVelocity > 0)
+            {
+                sr.flipX = true;
+            }
+            else if (horizontalVelocity < 0)
+            {
+                sr.flipX = false;
+            }
+
+            rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
+
+            if (Input.GetButtonDown("Lunge"))
+            {
+                anim.SetTrigger("Lunge");
+                dashDirection = sr.flipX ? 1 : -1;
+                dashTimer = 0;
+            }
+
+            dashTimer += Time.deltaTime;
+            if (dashDirection != 0)
+            {
+                if (dashTimer >= DashTime)
+                {
+                    dashDirection = 0;
+                }
+                else
+                {
+                    rb.velocity += new Vector2(DashSpeed * dashDirection, 0);
+                }
+            }
+
+
+        }
     }
 }
