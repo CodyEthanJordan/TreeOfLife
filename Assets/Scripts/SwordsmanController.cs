@@ -51,7 +51,7 @@ namespace Assets.Scripts
                 return;
             }
 
-            rb.velocity = Vector2.up * JumpVelocity;
+            rb.AddForce(new Vector2(0, JumpVelocity), ForceMode2D.Impulse);
             canJump = false;
         }
 
@@ -63,7 +63,8 @@ namespace Assets.Scripts
             }
             float horizontalVelocity = dir * Speed * Time.deltaTime;
             anim.SetFloat("Speed", Mathf.Abs(horizontalVelocity));
-            rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
+            Vector2 force = new Vector2(horizontalVelocity, 0);
+            rb.AddForce(force, ForceMode2D.Force);
         }
 
         public void Lunge(bool right)
@@ -77,6 +78,12 @@ namespace Assets.Scripts
             dashDirection = right ? 1 : -1;
             dashTimer = 0;
             lungeTimer = 0;
+            rb.AddForce(new Vector2(DashSpeed * dashDirection, 0), ForceMode2D.Impulse);
+        }
+
+        public void Parry()
+        {
+            anim.SetTrigger("Parry");
         }
 
         private void Update()
@@ -120,8 +127,7 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    Debug.Log("yo");
-                    rb.velocity += new Vector2(DashSpeed * dashDirection, 0);
+                    //rb.velocity += new Vector2(DashSpeed * dashDirection, DashSpeed * dashDirection);
                 }
             }
                     Debug.Log(rb.velocity);

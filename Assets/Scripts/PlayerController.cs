@@ -33,6 +33,11 @@ namespace Assets.Scripts
                 sc.Lunge(false);
             }
 
+            if (Input.GetButtonDown("Parry"))
+            {
+                sc.Parry();
+            }
+
             if (Input.GetKeyDown(KeyCode.K))
             {
                 sc.Die();
