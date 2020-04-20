@@ -31,7 +31,7 @@ namespace Assets.Scripts
                 //Debug.Log("Attack!");
                 sc.Lunge(directionToPlayer > 0);
             }
-            else
+            else if (distanceToPlayer < 10)
             {
                 sc.Move(directionToPlayer * 0.7f);
             }
