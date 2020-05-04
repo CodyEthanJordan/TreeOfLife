@@ -12,16 +12,19 @@ namespace Assets.Scripts
         public Transform Destination;
         public bool SetFixedCamera;
         public Transform CameraPosition;
+        public PolygonCollider2D CameraBounder;
 
 
         [SerializeField]
         private Cinemachine.CinemachineVirtualCamera vc;
+        private Cinemachine.CinemachineConfiner conf;
         [SerializeField]
         private GameObject player;
 
         private void Start()
         {
             vc = GameObject.Find("VCAM").GetComponent<Cinemachine.CinemachineVirtualCamera>();
+            conf = GameObject.Find("VCAM").GetComponent<Cinemachine.CinemachineConfiner>();
             player = GameObject.Find("Player");
         }
 
@@ -38,10 +41,12 @@ namespace Assets.Scripts
             if(SetFixedCamera)
             {
                 vc.Follow = null;
+                conf.m_BoundingShape2D = null;
             }
             else
             {
                 vc.Follow = player.transform;
+                conf.m_BoundingShape2D = CameraBounder;
             }
 
         }

@@ -46,7 +46,6 @@ namespace Assets.Scripts
             Dead = true;
             col.enabled = false;
             rb.constraints = RigidbodyConstraints2D.FreezePosition;
-
         }
 
         public void Jump()
